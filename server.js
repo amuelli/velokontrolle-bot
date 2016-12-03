@@ -15,6 +15,7 @@ var slapp = Slapp({
   convo_store: ConvoStore(),
   context: Context()
 })
+console.log(Slapp);
 
 
 var HELP_TEXT = `
@@ -24,6 +25,7 @@ I will respond to the following messages:
 \`thanks\` - to demonstrate a simple response.
 \`<type-any-other-text>\` - to demonstrate a random emoticon response, some of the time :wink:.
 \`attachment\` - to see a Slack attachment message.
+\`yesno\` - to see a Slack interactive message.
 `
 
 //*********************************************
@@ -33,6 +35,26 @@ I will respond to the following messages:
 // response to the user typing "help"
 slapp.message('help', ['mention', 'direct_message'], (msg) => {
   msg.say(HELP_TEXT)
+})
+
+slapp.message('yesno', (msg) => {
+  msg.say({
+      text: '',
+      attachments: [
+        {
+          text: '',
+          fallback: 'Yes or No?',
+          callback_id: 'yesno_callback',
+          actions: [
+            { name: 'answer', text: 'Yes', type: 'button', value: 'yes' },
+            { name: 'answer', text: 'No',  type: 'button',  value: 'no' }
+          ]
+        }]
+      })
+})
+
+slapp.action('yesno_callback', 'answer', (msg, value) => {
+  msg.respond(msg.body.response_url, `${value} is a good choice!`)
 })
 
 // "Conversation" flow that tracks state - kicks off when user says hi, hello or hey
