@@ -6,24 +6,20 @@ config:
 - name: TWITTER_CONSUMER_KEY
   friendly_name: Twitter Consumer Key
   info: Twitter Consumer Key
-  default: Twitter Consumer Key
   type: secret
   global: true
 - name: TWITTER_CONSUMER_SECRET
   friendly_name: Twitter Consumer Secret
   info: Twitter Consumer Secret
-  default: Twitter Consumer Secret
   type: secret
   global: true
 - name: TWITTER_ACCESS_TOKEN_KEY
   friendly_name: Twitter Access Token Key
   info: Twitter Access Token Key
-  default: Twitter Access Token Key
   type: secret
   global: true
 - name: TWITTER_ACCESS_TOKEN_SECRET
   friendly_name: Twitter Access Token Secret
   info: Twitter Access Token Secret
-  default: Twitter Access Token Secret
   type: secret
   global: true

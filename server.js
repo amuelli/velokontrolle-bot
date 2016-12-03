@@ -124,7 +124,10 @@ server.listen(port, (err) => {
   }
 
   console.log(`Listening on port ${port}`)
-  console.log(process.env);
+  console.log(process.env.TWITTER_CONSUMER_KEY);
+  console.log(process.env.TWITTER_CONSUMER_SECRET);
+  console.log(process.env.TWITTER_ACCESS_TOKEN_KEY);
+  console.log(process.env.TWITTER_ACCESS_TOKEN_SECRET);
 })
 
 
