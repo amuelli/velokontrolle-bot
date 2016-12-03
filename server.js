@@ -4,6 +4,7 @@ const express = require('express')
 const Slapp = require('slapp')
 const ConvoStore = require('slapp-convo-beepboop')
 const Context = require('slapp-context-beepboop')
+const Twitter = require('twitter');
 
 // use `PORT` env var on Beep Boop - default to 3000 locally
 var port = process.env.PORT || 3000
@@ -124,3 +125,32 @@ server.listen(port, (err) => {
 
   console.log(`Listening on port ${port}`)
 })
+
+
+var client = new Twitter({
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+  access_token_secret: process.env.TWITTER_CONSUMER_SECRET
+});
+
+
+/**
+ * Stream statuses filtered by keyword
+ * number of tweets per second depends on topic popularity
+ **/
+client.stream('statuses/filter', {track: 'velokontrolle'},  function(stream) {
+  stream.on('data', function(tweet) {
+    console.log(tweet.text);
+    console.log(tweet);
+    //bot.say(
+      //{
+        //text: 'Tweet: ' + tweet.text + ' http://twitter.com/' + tweet.user.screen_name + '/status/' + tweet.id_str,
+        //channel: 'velokontrolle-bot' // a valid slack channel, group, mpim, or im ID
+      //}
+    //);
+  });
+  stream.on('error', function(error) {
+    console.log(error);
+  });
+});
