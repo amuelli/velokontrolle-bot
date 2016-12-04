@@ -15,7 +15,6 @@ var slapp = Slapp({
   convo_store: ConvoStore(),
   context: Context()
 })
-console.log(Slapp);
 
 
 var HELP_TEXT = `
