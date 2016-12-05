@@ -23,7 +23,7 @@ var slapp = Slapp({
 
 
 slapp.event('message', (msg) => {
-  if( msg.body.event.subtype === 'channel_join' && msg.body.event.user === msg.body.authed_users[0]) {
+  if((msg.body.event.subtype === 'channel_join' || msg.body.event.subtype === 'group_join') && msg.body.event.user === msg.body.authed_users[0]) {
     msg.say('hoi zäme, ich bin der Velokontrolle-Bot und werde nun auf Twitter nach Hinweisen für Velokontrollen Ausschau halten.')
     client.stream('statuses/filter', {track: 'velokontrolle'},  function(stream) {
       stream.on('data', function(tweet) {
